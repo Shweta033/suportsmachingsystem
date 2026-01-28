@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
 import '../../../../themes/app_colors.dart';
 import '../../../../themes/app_textstyle.dart';
 import '../../../../utills/responsive.dart';
@@ -25,7 +23,6 @@ class HeroSection extends StatelessWidget {
         children: [
           /// LOGO
           _Logo(),
-
           const Spacer(),
 
           /// MENU (Desktop)

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:spotmatchingsystem/modules/home/views/widgets/footer_dart.dart';
 import 'package:spotmatchingsystem/modules/home/views/widgets/status_section.dart';
 import '../controllers/home_controller.dart';
-import 'widgets/navbar.dart' hide NavBar;
+import 'widgets/navbar.dart';
 import 'widgets/hero_section.dart';
 
 import 'widgets/pricing_section.dart';
@@ -17,7 +17,8 @@ class HomeView extends GetView<HomeController> {
       body: SingleChildScrollView(
         child: Column(
           children: const [
-            // NavBar(),
+            NavBar(),
+            SizedBox(height: 40),
             HeroSection(),
             StatsSection(),
             // WhyChooseSection(),
