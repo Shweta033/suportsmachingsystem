@@ -1,70 +1,135 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+import '../../../../themes/app_colors.dart';
+import '../../../../themes/app_textstyle.dart';
 import '../../../../utills/responsive.dart';
-import '../../controllers/home_controller.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(HomeController());
+    final isMobile = Responsive.isMobile(context);
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: isMobile ? 20 : 80,
+        vertical: 16,
+      ),
+      decoration: const BoxDecoration(
+        color: AppColors.white,
+        border: Border(bottom: BorderSide(color: AppColors.border)),
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          /// LOGO IMAGE (LEFT)
-          Image.asset(
-            'assets/images/logo.png', // <-- your logo path
-            height: 32,
-            fit: BoxFit.contain,
+          /// LOGO
+           _Logo(),
+
+          // const SizedBox(width: 32),
+
+          /// MENU (THIS FIXES OVERFLOW)
+          SizedBox(
+            width: MediaQuery.of(context).size.width*0.20,
+            child: _DesktopMenu(),
           ),
 
-          const Spacer(),
+          const SizedBox(width: 24),
 
-          /// MENU ITEMS (DESKTOP / WEB)
-          if (!Responsive.isMobile(context))
-            Wrap(
-              spacing: 24,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: const [
-                NavItem('What is SMS'),
-                NavItem('Colour System'),
-                NavItem('Why Choose SMS'),
-                NavItem('For Designers'),
-              ],
-            )
-          else
-          /// MOBILE MENU ICON
-            IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: controller.toggleMenu,
-            ),
+          /// CTA BUTTON
+           _ShopButton(),
         ],
       ),
+
     );
   }
 }
 
-class NavItem extends StatelessWidget {
-  final String title;
+class _Logo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        // Placeholder for logo icon
+        Container(
+          width: 28,
+          height: 28,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: AppColors.primary,
+          ),
+          child: const Center(
+            child: Text(
+              'S',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 10),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Text(
+              'SPOT',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+            ),
+            Text(
+              'matching system',
+              style: TextStyle(fontSize: 10, color: AppColors.textLight),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
 
-  const NavItem(this.title, {super.key});
+class _DesktopMenu extends StatelessWidget {
+  const _DesktopMenu({super.key});
+
+  final List<String> items = const [
+    'What is SMS',
+    'Colour System',
+    'Why Choose SMS',
+    'For Designers',
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: const TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-        color: Colors.black87,
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Wrap(
+        spacing: 13,
+        runSpacing: 12,
+        alignment: WrapAlignment.end,
+        children: items
+            .map(
+              (item) => Text(
+            item,
+            style: AppTextStyles.navItem,
+          ),
+        )
+            .toList(),
       ),
     );
   }
 }
 
+
+class _ShopButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.primary,
+        padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+        elevation: 0,
+      ),
+      onPressed: () {},
+      child: Text('Shop SMS', style: AppTextStyles.button),
+    );
+  }
+}
