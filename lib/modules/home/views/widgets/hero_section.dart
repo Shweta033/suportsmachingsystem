@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../themes/app_colors.dart';
 import '../../../../themes/app_textstyle.dart';
-import '../../../../utills/asset_loader.dart';
 import '../../../../utills/responsive.dart';
 
 class HeroSection extends StatelessWidget {
@@ -126,10 +125,10 @@ class HeroSection extends StatelessWidget {
         maxWidth: isMobile ? 320 : (isTablet ? 380 : 480),
         maxHeight: isMobile ? 280 : (isTablet ? 360 : 440),
       ),
-      child: SvgAssetWithFallback(
-        assetPath: 'assets/images/hero_cmyk.svg',
+      child: Image.asset(
+        'assets/images/hero_cmyk.png',
         fit: BoxFit.contain,
-        fallback: _CmykPlaceholder(),
+        errorBuilder: (_, __, ___) => _CmykPlaceholder(),
       ),
     );
 
@@ -168,7 +167,7 @@ class HeroSection extends StatelessWidget {
   }
 }
 
-/// Simple CMYK bars shown when hero_cmyk.svg fails to load (e.g. web / embedded raster).
+/// Simple CMYK bars shown when hero_cmyk.png fails to load.
 class _CmykPlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

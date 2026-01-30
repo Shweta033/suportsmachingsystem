@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import '../../../../themes/app_colors.dart';
-import '../../../../utills/asset_loader.dart';
 import '../../../../utills/responsive.dart';
 import '../../controllers/home_controller.dart';
 
@@ -26,14 +25,14 @@ class NavBar extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                /// LOGO (LEFT) - SVG with fallback when asset fails (e.g. web / embedded raster)
+                /// LOGO (LEFT)
                 SizedBox(
                   width: 140,
                   height: 40,
-                  child: SvgAssetWithFallback(
-                    assetPath: 'assets/images/logo.svg',
+                  child: Image.asset(
+                    'assets/images/logo.png',
                     fit: BoxFit.contain,
-                    fallback: _LogoPlaceholder(),
+                    errorBuilder: (_, __, ___) => _LogoPlaceholder(),
                   ),
                 ),
 
