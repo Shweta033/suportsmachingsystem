@@ -6,96 +6,103 @@ import '../../../../utills/responsive.dart';
 class HeroSection extends StatelessWidget {
   const HeroSection({super.key});
 
-  Widget stat(String value, String label) {
-    return Column(
-      children: [
-        Text(
-          value,
-          style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 6),
-        Text(label),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(40),
-      child: Wrap(
-        spacing: 60,
-        runSpacing: 40,
-        alignment: WrapAlignment.center,
-        children: [
-          stat('359M', 'Companies Registered'),
-          stat('15,000+', 'SMS Colors'),
-          stat('ISO 12647', 'Based Standard'),
-        ],
-      ),
-    );
-  }
-}
-
-class HeroStats extends StatelessWidget {
-  const HeroStats({super.key});
-
-  @override
-  Widget build(BuildContext context) {
+    final padding = Responsive.horizontalPadding(context);
+    final spacing = Responsive.sectionSpacing(context);
     final isMobile = Responsive.isMobile(context);
+    final isTablet = Responsive.isTablet(context);
 
     return Container(
       width: double.infinity,
-      color: AppColors.buttonPrimary, // light cream bg
       padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 20 : 80,
-        vertical: isMobile ? 40 : 56,
+        horizontal: padding,
+        vertical: isMobile ? 48 : (isTablet ? 64 : 80),
       ),
-      child: isMobile
-          ? Column(children: _stats())
-          : Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: _stats(),
-            ),
-    );
-  }
-
-  List<Widget> _stats() {
-    return const [
-      _StatItem(value: '359.000.000', label: 'Company Registered'),
-      _StatItem(value: '15.000', label: 'SMS Colours'),
-      _StatItem(value: 'ISO 12647', label: 'Based Colour'),
-    ];
-  }
-}
-
-class _StatItem extends StatelessWidget {
-  final String value;
-  final String label;
-
-  const _StatItem({required this.value, required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          value,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 34,
-            fontWeight: FontWeight.w700,
-            color: AppColors.background,
-            letterSpacing: -0.5,
+      decoration: const BoxDecoration(
+        color: AppColors.background,
+        border: Border(bottom: BorderSide(color: AppColors.border)),
+      ),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 720),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'The global standard for colour',
+                style: (isMobile ? AppTextStyles.h3 : AppTextStyles.h1).copyWith(
+                  fontSize: isMobile ? 28 : (isTablet ? 40 : 48),
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.textPrimary,
+                  height: 1.2,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: isMobile ? 16 : 24),
+              Text(
+                'Spot Matching System (SMS) is the recognised standard for colour communication in print and packaging. Join millions of companies using SMS for consistent, reproducible colour.',
+                style: AppTextStyles.body.copyWith(
+                  fontSize: isMobile ? 14 : 18,
+                  color: AppColors.textSecondary,
+                  height: 1.6,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: isMobile ? 28 : 40),
+              Wrap(
+                alignment: WrapAlignment.center,
+                spacing: 16,
+                runSpacing: 12,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: AppColors.buttonText,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: isMobile ? 24 : 32,
+                        vertical: isMobile ? 14 : 18,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      elevation: 0,
+                    ),
+                    onPressed: () {},
+                    child: Text(
+                      'Shop SMS',
+                      style: AppTextStyles.button.copyWith(
+                        fontSize: isMobile ? 14 : 16,
+                      ),
+                    ),
+                  ),
+                  OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: AppColors.primary,
+                      side: const BorderSide(color: AppColors.primary),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: isMobile ? 24 : 32,
+                        vertical: isMobile ? 14 : 18,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: Text(
+                      'What is SMS',
+                      style: AppTextStyles.button.copyWith(
+                        fontSize: isMobile ? 14 : 16,
+                        color: AppColors.primary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
-        const SizedBox(height: 10),
-        Text(
-          label,
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 14, color: AppColors.textLight),
-        ),
-      ],
+      ),
     );
   }
 }
