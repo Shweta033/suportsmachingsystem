@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import '../../../../themes/app_colors.dart';
+import '../../../../utills/asset_loader.dart';
 import '../../../../utills/responsive.dart';
 import '../../controllers/home_controller.dart';
 
@@ -24,53 +26,64 @@ class NavBar extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                /// LOGO IMAGE (LEFT) - fixed size, won't grow
+                /// LOGO (LEFT) - SVG with fallback when asset fails (e.g. web / embedded raster)
                 SizedBox(
                   width: 140,
                   height: 40,
-                  child: Image.asset(
-                    'assets/images/smslogoimage.png',
+                  child: SvgAssetWithFallback(
+                    assetPath: 'assets/images/logo.svg',
                     fit: BoxFit.contain,
-                    errorBuilder: (_, __, ___) => const SizedBox.shrink(),
+                    fallback: _LogoPlaceholder(),
                   ),
                 ),
 
                 const SizedBox(width: 16),
 
-                /// MENU ITEMS - take remaining space and wrap, or scroll if needed
+                /// MENU ITEMS + SHOP BUTTON (desktop)
                 if (!Responsive.isMobile(context))
                   Expanded(
                     child: LayoutBuilder(
                       builder: (context, innerConstraints) {
                         final navWidth = innerConstraints.maxWidth;
-                        // If nav items don't fit in one row, use horizontal scroll
-                        const minNavWidth = 400.0; // ~4 items * ~100px
+                        const minNavWidth = 400.0;
                         if (navWidth < minNavWidth) {
                           return SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
-                              children: const [
-                                NavItem('What is SMS'),
-                                SizedBox(width: 16),
-                                NavItem('Colour System'),
-                                SizedBox(width: 16),
-                                NavItem('Why Choose SMS'),
-                                SizedBox(width: 16),
-                                NavItem('For Designers'),
+                              children: [
+                                const NavItem('What is SMS'),
+                                const SizedBox(width: 16),
+                                const NavItem('Colour System'),
+                                const SizedBox(width: 16),
+                                const NavItem('Why Choose SMS'),
+                                const SizedBox(width: 16),
+                                const NavItem('For Designers'),
+                                const SizedBox(width: 24),
+                                _ShopButton(),
                               ],
                             ),
                           );
                         }
-                        return Wrap(
-                          spacing: 24,
-                          runSpacing: 8,
-                          alignment: WrapAlignment.end,
-                          children: const [
-                            NavItem('What is SMS'),
-                            NavItem('Colour System'),
-                            NavItem('Why Choose SMS'),
-                            NavItem('For Designers'),
+                        return Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Flexible(
+                              child: Wrap(
+                                spacing: 24,
+                                runSpacing: 8,
+                                alignment: WrapAlignment.end,
+                                children: const [
+                                  NavItem('What is SMS'),
+                                  NavItem('Colour System'),
+                                  NavItem('Why Choose SMS'),
+                                  NavItem('For Designers'),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 24),
+                            _ShopButton(),
                           ],
                         );
                       },
@@ -78,11 +91,13 @@ class NavBar extends StatelessWidget {
                   )
                 else
                   const Spacer(),
-                if (Responsive.isMobile(context))
+                if (Responsive.isMobile(context)) ...[
+                  _ShopButton(),
                   IconButton(
                     icon: const Icon(Icons.menu),
                     onPressed: controller.toggleMenu,
                   ),
+                ],
               ],
             ),
           );
@@ -105,6 +120,82 @@ class NavItem extends StatelessWidget {
         fontSize: 14,
         fontWeight: FontWeight.w500,
         color: Colors.black87,
+      ),
+    );
+  }
+}
+
+class _LogoPlaceholder extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 32,
+          height: 32,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: AppColors.primary,
+          ),
+          child: const Center(
+            child: Text(
+              'S',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 8),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'SPOT',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: AppColors.primary,
+              ),
+            ),
+            Text(
+              'matching system',
+              style: TextStyle(
+                fontSize: 10,
+                color: AppColors.textLight,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _ShopButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.primary,
+        foregroundColor: AppColors.buttonText,
+        padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        elevation: 0,
+      ),
+      onPressed: () {},
+      child: const Text(
+        'Shop SMS',
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }
