@@ -11,83 +11,179 @@ class ExploreSection extends StatelessWidget {
     final padding = Responsive.horizontalPadding(context);
     final spacing = Responsive.sectionSpacing(context);
     final isMobile = Responsive.isMobile(context);
+    final crossCount = Responsive.gridCrossAxisCount(context);
+
+    final items = [
+      const _ExploreItem(
+        title: 'SMS Standard (P20)',
+        body: 'Natural, balanced colours for web, TV, and CMYK printing',
+      ),
+      const _ExploreItem(
+        title: 'SMS Max (P20x)',
+        body:
+            'Vivid colours for coated print, packaging, signage, web, and TV.',
+      ),
+      const _ExploreItem(
+        title: 'SMS Eco (P20e)',
+        body: 'Earthy, natural colours for recycled, and uncoated papers',
+      ),
+      const _ExploreItem(
+        title: 'SMS Max Home & Office (P20xo)',
+        body: 'Vivid colours low-gamut customer displays.',
+      ),
+      const _ExploreItem(
+        title: 'SMS Standard Home & Office (P20o)',
+        body: 'Standard colours optimised for laptop displays',
+      ),
+      const _ExploreItem(
+        title: 'SMS Super Max(P20sx)',
+        body: 'Super-vivid colours for Extended Gamut printing',
+      ),
+    ];
 
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: padding,
-        vertical: spacing,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Explore SMS',
-            style: (isMobile ? AppTextStyles.h3 : AppTextStyles.h2).copyWith(
-              fontSize: isMobile ? 24 : 32,
-              color: AppColors.textPrimary,
-            ),
-          ),
-          SizedBox(height: isMobile ? 16 : 24),
-          Text(
-            'Discover the Spot Matching System—the global standard for colour communication in print and packaging. Browse colours, learn about the colour system, and find resources for designers and brands.',
-            style: AppTextStyles.body.copyWith(
-              fontSize: isMobile ? 14 : 16,
-              color: AppColors.textSecondary,
-            ),
-          ),
-          SizedBox(height: isMobile ? 24 : 32),
-          Wrap(
-            spacing: 16,
-            runSpacing: 16,
+      padding: EdgeInsets.symmetric(horizontal: padding, vertical: spacing),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1100),
+          child: Column(
             children: [
-              _ExploreChip(
-                label: 'What is SMS',
-                onTap: () {},
+              Text(
+                'Explore the SMS System',
+                textAlign: TextAlign.center,
+                style: (isMobile ? AppTextStyles.h3 : AppTextStyles.h2)
+                    .copyWith(
+                      fontSize: isMobile ? 24 : 32,
+                      color: AppColors.primary,
+                    ),
               ),
-              _ExploreChip(
-                label: 'Colour System',
-                onTap: () {},
+              SizedBox(height: isMobile ? 24 : 32),
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  if (crossCount == 1) {
+                    return Column(
+                      children: items
+                          .map(
+                            (item) => Padding(
+                              padding: const EdgeInsets.only(bottom: 16),
+                              child: _ExploreCard(item: item),
+                            ),
+                          )
+                          .toList(),
+                    );
+                  }
+                  final gap = 18.0;
+                  final itemWidth = (constraints.maxWidth - gap) / 2;
+                  return Wrap(
+                    spacing: gap,
+                    runSpacing: gap,
+                    children: items
+                        .map(
+                          (item) => SizedBox(
+                            width: itemWidth,
+                            child: _ExploreCard(item: item),
+                          ),
+                        )
+                        .toList(),
+                  );
+                },
               ),
-              _ExploreChip(
-                label: 'For Designers',
-                onTap: () {},
+              SizedBox(height: isMobile ? 40 : 56),
+              Text(
+                'Trusted Worldwide',
+                textAlign: TextAlign.center,
+                style: (isMobile ? AppTextStyles.h3 : AppTextStyles.h2)
+                    .copyWith(
+                      fontSize: isMobile ? 24 : 32,
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w700,
+                    ),
               ),
-              _ExploreChip(
-                label: 'Shop SMS',
-                onTap: () {},
+              SizedBox(height: isMobile ? 12 : 16),
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 760),
+                child: Text(
+                  'SMS is used by designers, agencies, printers, and brand owners who need colour that works everywhere not just in perfect conditions.',
+                  textAlign: TextAlign.center,
+                  style: AppTextStyles.body.copyWith(
+                    fontSize: isMobile ? 13.5 : 15.5,
+                    color: AppColors.textSecondary,
+                    height: 1.1,
+                  ),
+                ),
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }
 }
 
-class _ExploreChip extends StatelessWidget {
-  final String label;
-  final VoidCallback onTap;
+class _ExploreItem {
+  final String title;
+  final String body;
 
-  const _ExploreChip({required this.label, required this.onTap});
+  const _ExploreItem({required this.title, required this.body});
+}
+
+class _ExploreCard extends StatelessWidget {
+  final _ExploreItem item;
+
+  const _ExploreCard({required this.item});
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: AppColors.secondary,
-      borderRadius: BorderRadius.circular(8),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(8),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-          child: Text(
-            label,
-            style: AppTextStyles.navItem.copyWith(
-              fontSize: 14,
-              color: AppColors.primary,
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 20),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(14),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 14,
+            offset: const Offset(0, 6),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            item.title,
+            style: AppTextStyles.h3.copyWith(
+              fontSize: 16.5,
+              fontWeight: FontWeight.w700,
+              color: AppColors.textPrimary,
             ),
           ),
-        ),
+          const SizedBox(height: 8),
+          Text(
+            item.body,
+            style: AppTextStyles.body.copyWith(
+              fontSize: 13.5,
+              color: AppColors.textSecondary,
+              height: 1.2,
+            ),
+          ),
+          const SizedBox(height: 14),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Learn more',
+                style: AppTextStyles.body.copyWith(
+                  fontSize: 13.5,
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(width: 6),
+              Icon(Icons.arrow_right_alt, size: 18, color: AppColors.primary),
+            ],
+          ),
+        ],
       ),
     );
   }
