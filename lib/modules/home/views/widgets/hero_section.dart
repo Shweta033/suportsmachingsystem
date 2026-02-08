@@ -22,7 +22,7 @@ class HeroSection extends StatelessWidget {
           style: (isMobile ? AppTextStyles.h3 : AppTextStyles.h1).copyWith(
             fontSize: isMobile ? 28 : (isTablet ? 40 : 52),
             fontWeight: FontWeight.w700,
-            color: AppColors.primary,
+            color: AppColors.textColor,
             height: 1.1,
             letterSpacing: -0.5,
           ),
@@ -32,7 +32,7 @@ class HeroSection extends StatelessWidget {
           style: (isMobile ? AppTextStyles.h3 : AppTextStyles.h1).copyWith(
             fontSize: isMobile ? 28 : (isTablet ? 40 : 52),
             fontWeight: FontWeight.w700,
-            color: AppColors.primary,
+            color: AppColors.textColor,
             height: 1.1,
             letterSpacing: -0.5,
           ),
@@ -42,7 +42,7 @@ class HeroSection extends StatelessWidget {
           style: (isMobile ? AppTextStyles.h3 : AppTextStyles.h1).copyWith(
             fontSize: isMobile ? 28 : (isTablet ? 40 : 52),
             fontWeight: FontWeight.w700,
-            color: AppColors.primary,
+            color: AppColors.textColor,
             height: 1.1,
             letterSpacing: -0.5,
           ),
@@ -126,7 +126,7 @@ class HeroSection extends StatelessWidget {
         maxHeight: isMobile ? 280 : (isTablet ? 360 : 440),
       ),
       child: Image.asset(
-        'assets/images/hero_cmyk.png',
+        'assets/images/spotbgimage.png',
         fit: BoxFit.contain,
         errorBuilder: (_, __, ___) => _CmykPlaceholder(),
       ),

@@ -17,13 +17,15 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
-          children: const [
+          children: [
             NavBar(),
             HeroSection(),
             StatsSection(),
             WhyChooseSection(),
             ExploreSection(),
             PricingSection(),
+            Divider(color: Colors.brown.shade200),
+            SizedBox(height: 15),
             Footer(),
           ],
         ),

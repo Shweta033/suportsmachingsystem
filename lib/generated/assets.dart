@@ -2,6 +2,9 @@
 class Assets {
   Assets._();
 
-  static const String imagesSmslogoimage = 'assets/images/smslogoimage.png';
-
+  static const String assetsImagesHeroCmyk = 'assets/images/hero_cmyk.png';
+  static const String assetsImagesLogo = 'assets/images/logo.png';
+  static const String imagesHeroCmyk = 'assets/images/hero_cmyk.png';
+  static const String imagesLogo = 'assets/images/logo.png';
+  static const String imagesSpotbgimage = 'assets/images/spotbgimage.png';
 }

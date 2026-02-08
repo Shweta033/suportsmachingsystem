@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../../../../themes/app_colors.dart';
 import '../../../../utills/responsive.dart';
 import '../../controllers/home_controller.dart';
+import '../../../../routes/app_routes.dart';
+import 'explore_section.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
@@ -16,7 +16,10 @@ class NavBar extends StatelessWidget {
     final horizontalPadding = Responsive.horizontalPadding(context);
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 20),
+      padding: EdgeInsets.symmetric(
+        horizontal: horizontalPadding,
+        vertical: 20,
+      ),
       child: LayoutBuilder(
         builder: (context, constraints) {
           return SizedBox(
@@ -51,9 +54,16 @@ class NavBar extends StatelessWidget {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                const NavItem('What is SMS'),
+                                NavItem(
+                                  'What is SMS',
+                                  // onTap: () => Get.toNamed(AppRoutes.),
+                                ),
                                 const SizedBox(width: 16),
-                                const NavItem('Colour System'),
+                                NavItem(
+                                  'Colour System',
+                                  // onTap: () =>
+                                  // Get.toNamed(AppRoutes.ExploreSection),
+                                ),
                                 const SizedBox(width: 16),
                                 const NavItem('Why Choose SMS'),
                                 const SizedBox(width: 16),
@@ -73,9 +83,17 @@ class NavBar extends StatelessWidget {
                                 spacing: 24,
                                 runSpacing: 8,
                                 alignment: WrapAlignment.end,
-                                children: const [
-                                  NavItem('What is SMS'),
-                                  NavItem('Colour System'),
+                                children: [
+                                  NavItem(
+                                    'What is SMS',
+                                    onTap: () =>
+                                        Get.toNamed(AppRoutes.WhatIsSmsView),
+                                  ),
+                                  NavItem(
+                                    'Colour System',
+                                    // onTap: () =>
+                                    // Get.toNamed(AppRoutes.colourSystem),
+                                  ),
                                   NavItem('Why Choose SMS'),
                                   NavItem('For Designers'),
                                 ],
@@ -108,17 +126,32 @@ class NavBar extends StatelessWidget {
 
 class NavItem extends StatelessWidget {
   final String title;
+  final VoidCallback? onTap;
 
-  const NavItem(this.title, {super.key});
+  const NavItem(this.title, {super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    final text = Text(
       title,
       style: const TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w500,
         color: Colors.black87,
+      ),
+    );
+
+    if (onTap == null) return text;
+
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: onTap,
+        behavior: HitTestBehavior.opaque,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 6),
+          child: text,
+        ),
       ),
     );
   }
@@ -163,10 +196,7 @@ class _LogoPlaceholder extends StatelessWidget {
             ),
             Text(
               'matching system',
-              style: TextStyle(
-                fontSize: 10,
-                color: AppColors.textLight,
-              ),
+              style: TextStyle(fontSize: 10, color: AppColors.textLight),
             ),
           ],
         ),
@@ -183,20 +213,14 @@ class _ShopButton extends StatelessWidget {
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.buttonText,
         padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         elevation: 0,
       ),
       onPressed: () {},
       child: const Text(
         'Shop SMS',
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-        ),
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
       ),
     );
   }
 }
-

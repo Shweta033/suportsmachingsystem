@@ -171,7 +171,7 @@ class _FooterBrand extends StatelessWidget {
           'matching system',
           style: AppTextStyles.body.copyWith(
             fontSize: 12.5,
-            color: AppColors.primary,
+            color: AppColors.secondaryS,
             height: 1.4,
           ),
         ),
@@ -179,7 +179,7 @@ class _FooterBrand extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.mail, size: 18, color: AppColors.primary),
+            Icon(Icons.mail, size: 18, color: AppColors.buttonPrimary),
             const SizedBox(width: 8),
             Text(
               'support@spotmatchingsystem.com',
@@ -245,7 +245,7 @@ class _FooterColumn extends StatelessWidget {
       children: [
         Text(title, style: headingStyle),
         const SizedBox(height: 8),
-        ...items.map((item) => Text(item, style: itemStyle)).toList(),
+        ...items.map((item) => Text(item, style: itemStyle)),
       ],
     );
   }
