@@ -2,9 +2,12 @@
 class Assets {
   Assets._();
 
-  static const String assetsImagesHeroCmyk = 'assets/images/hero_cmyk.png';
   static const String assetsImagesLogo = 'assets/images/logo.png';
+  static const String assetsImagesSpotbgimage = 'assets/images/spotbgimage.png';
+  static const String imagesArrowimg = 'assets/images/arrowimg.png';
+  static const String imagesBallongirlimg = 'assets/images/ballongirlimg.png';
   static const String imagesHeroCmyk = 'assets/images/hero_cmyk.png';
   static const String imagesLogo = 'assets/images/logo.png';
+  static const String imagesSmsreadyimage = 'assets/images/smsreadyimage.png';
   static const String imagesSpotbgimage = 'assets/images/spotbgimage.png';
 }

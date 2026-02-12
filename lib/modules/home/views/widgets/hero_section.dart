@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '../../../../themes/app_colors.dart';
 import '../../../../themes/app_textstyle.dart';
 import '../../../../utills/responsive.dart';
@@ -12,112 +14,116 @@ class HeroSection extends StatelessWidget {
     final isMobile = Responsive.isMobile(context);
     final isTablet = Responsive.isTablet(context);
 
-    final content = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        // Title: "The Spot Matching System v7" (stacked)
-        Text(
-          'The Spot',
-          style: (isMobile ? AppTextStyles.h3 : AppTextStyles.h1).copyWith(
-            fontSize: isMobile ? 28 : (isTablet ? 40 : 52),
-            fontWeight: FontWeight.w700,
-            color: AppColors.textColor,
-            height: 1.1,
-            letterSpacing: -0.5,
-          ),
-        ),
-        Text(
-          'Matching',
-          style: (isMobile ? AppTextStyles.h3 : AppTextStyles.h1).copyWith(
-            fontSize: isMobile ? 28 : (isTablet ? 40 : 52),
-            fontWeight: FontWeight.w700,
-            color: AppColors.textColor,
-            height: 1.1,
-            letterSpacing: -0.5,
-          ),
-        ),
-        Text(
-          'System v7',
-          style: (isMobile ? AppTextStyles.h3 : AppTextStyles.h1).copyWith(
-            fontSize: isMobile ? 28 : (isTablet ? 40 : 52),
-            fontWeight: FontWeight.w700,
-            color: AppColors.textColor,
-            height: 1.1,
-            letterSpacing: -0.5,
-          ),
-        ),
-        SizedBox(height: isMobile ? 20 : 28),
-        // First subtitle
-        Text(
-          "The world's only 3C colour palette - CrossMedia Colour Consistency.",
-          style: AppTextStyles.body.copyWith(
-            fontSize: isMobile ? 14 : 17,
-            color: AppColors.textSecondary,
-            height: 1.5,
-          ),
-        ),
-        SizedBox(height: isMobile ? 12 : 16),
-        // Second subtitle
-        Text(
-          '2,607 CMYK-based colours designed for modern branding, printing, digital media, and real-world screens.',
-          style: AppTextStyles.body.copyWith(
-            fontSize: isMobile ? 14 : 17,
-            color: AppColors.textSecondary,
-            height: 1.5,
-          ),
-        ),
-        SizedBox(height: isMobile ? 24 : 32),
-        // Buttons
-        Wrap(
-          spacing: 16,
-          runSpacing: 12,
-          children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                foregroundColor: AppColors.buttonText,
-                padding: EdgeInsets.symmetric(
-                  horizontal: isMobile ? 24 : 32,
-                  vertical: isMobile ? 14 : 18,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                elevation: 0,
-              ),
-              onPressed: () {},
-              child: Text(
-                'Shop SMS',
-                style: AppTextStyles.button.copyWith(
-                  fontSize: isMobile ? 14 : 16,
-                ),
-              ),
+    final content = Container(
+      width: Get.width,
+      color: AppColors.Smsbackground,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Title: "The Spot Matching System v7" (stacked)
+          Text(
+            'The Spot',
+            style: (isMobile ? AppTextStyles.h3 : AppTextStyles.h1).copyWith(
+              fontSize: isMobile ? 28 : (isTablet ? 40 : 52),
+              fontWeight: FontWeight.w700,
+              color: AppColors.textColor,
+              height: 1.1,
+              letterSpacing: -0.5,
             ),
-            OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                foregroundColor: AppColors.primary,
-                side: const BorderSide(color: AppColors.primary),
-                padding: EdgeInsets.symmetric(
-                  horizontal: isMobile ? 24 : 32,
-                  vertical: isMobile ? 14 : 18,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              onPressed: () {},
-              child: Text(
-                'Explore the System',
-                style: AppTextStyles.button.copyWith(
-                  fontSize: isMobile ? 14 : 16,
-                  color: AppColors.primary,
-                ),
-              ),
+          ),
+          Text(
+            'Matching',
+            style: (isMobile ? AppTextStyles.h3 : AppTextStyles.h1).copyWith(
+              fontSize: isMobile ? 28 : (isTablet ? 40 : 52),
+              fontWeight: FontWeight.w700,
+              color: AppColors.textColor,
+              height: 1.1,
+              letterSpacing: -0.5,
             ),
-          ],
-        ),
-      ],
+          ),
+          Text(
+            'System v7',
+            style: (isMobile ? AppTextStyles.h3 : AppTextStyles.h1).copyWith(
+              fontSize: isMobile ? 28 : (isTablet ? 40 : 52),
+              fontWeight: FontWeight.w700,
+              color: AppColors.textColor,
+              height: 1.1,
+              letterSpacing: -0.5,
+            ),
+          ),
+          SizedBox(height: isMobile ? 20 : 28),
+          // First subtitle
+          Text(
+            "The world's only 3C colour palette - CrossMedia Colour Consistency.",
+            style: AppTextStyles.body.copyWith(
+              fontSize: isMobile ? 14 : 17,
+              color: AppColors.textSecondary,
+              height: 1.5,
+            ),
+          ),
+          SizedBox(height: isMobile ? 12 : 16),
+          // Second subtitle
+          Text(
+            '2,607 CMYK-based colours designed for modern branding, printing, digital media, and real-world screens.',
+            style: AppTextStyles.body.copyWith(
+              fontSize: isMobile ? 14 : 17,
+              color: AppColors.textSecondary,
+              height: 1.5,
+            ),
+          ),
+          SizedBox(height: isMobile ? 24 : 32),
+          // Buttons
+          Wrap(
+            spacing: 16,
+            runSpacing: 12,
+            children: [
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                  foregroundColor: AppColors.buttonText,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: isMobile ? 24 : 32,
+                    vertical: isMobile ? 14 : 18,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  elevation: 0,
+                ),
+                onPressed: () {},
+                child: Text(
+                  'Shop SMS',
+                  style: AppTextStyles.button.copyWith(
+                    fontSize: isMobile ? 14 : 16,
+                  ),
+                ),
+              ),
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: AppColors.primary,
+                  side: const BorderSide(color: AppColors.primary),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: isMobile ? 24 : 32,
+                    vertical: isMobile ? 14 : 18,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                onPressed: () {},
+                child: Text(
+                  'Explore the System',
+                  style: AppTextStyles.button.copyWith(
+                    fontSize: isMobile ? 14 : 16,
+                    color: AppColors.primary,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
 
     final cmykGraphic = ConstrainedBox(
@@ -139,7 +145,7 @@ class HeroSection extends StatelessWidget {
         vertical: isMobile ? 40 : (isTablet ? 56 : 72),
       ),
       decoration: const BoxDecoration(
-        color: AppColors.background,
+        color: AppColors.Smsbackground,
         border: Border(bottom: BorderSide(color: AppColors.border)),
       ),
       child: isMobile
@@ -168,6 +174,7 @@ class HeroSection extends StatelessWidget {
 }
 
 /// Simple CMYK bars shown when hero_cmyk.png fails to load.
+
 class _CmykPlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -49,7 +49,7 @@ class WhyChooseSection extends StatelessWidget {
     final isMobile = Responsive.isMobile(context);
 
     return Container(
-      color: AppColors.white,
+      color: AppColors.Smsbackground,
       padding: EdgeInsets.symmetric(horizontal: padding, vertical: spacing),
       child: Center(
         child: ConstrainedBox(

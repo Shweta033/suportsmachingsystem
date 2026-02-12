@@ -7,3 +7,11 @@ class HomeBinding extends Bindings {
     Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
   }
 }
+
+// class SmsReadyExpertBinding extends Bindings {
+//   @override
+//   void dependencies() {
+//     Get.lazyPut<HomeController>(() =>
+//         HomeController(), fenix: true);
+//   }
+// }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:spotmatchingsystem/themes/app_colors.dart';
 import '../controllers/home_controller.dart';
 import 'widgets/navbar.dart';
 import 'widgets/hero_section.dart';
@@ -15,6 +16,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.Smsbackground,
       body: SingleChildScrollView(
         child: Column(
           children: [

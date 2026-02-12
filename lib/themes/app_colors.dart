@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   // 🔹 Base colors
-  static const Color background = Color(0xFFFDF8F5);
+  static const Color background = Color(0xFFEEF1F5);
+  static const Color Smsbackground = Color(0xFFEEF1F5);
   static const Color white = Colors.white;
   static const Color black = Color(0xFF1C1C1C);
 
@@ -21,6 +22,7 @@ class AppColors {
   static const Color textPrimary = Color(0xFF7B4A3F);
   static const Color textSecondary = Color(0xFF6E6E6E);
   static const Color textLight = Color(0xFF9A9A9A);
+  static const Color LightGray = Color(0xFF7E7E7E);
 
   // 🔹 Border & divider
   static const Color border = Color(0xFFE0E0E0);

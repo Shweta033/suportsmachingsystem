@@ -13,10 +13,7 @@ class StatsSection extends StatelessWidget {
     final isMobile = Responsive.isMobile(context);
 
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: padding,
-        vertical: spacing,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: padding, vertical: spacing),
       child: LayoutBuilder(
         builder: (context, constraints) {
           return Wrap(
@@ -24,18 +21,9 @@ class StatsSection extends StatelessWidget {
             runSpacing: isMobile ? 24 : 32,
             alignment: WrapAlignment.center,
             children: [
-              _StatItem(
-                value: '359M',
-                label: 'Companies Registered',
-              ),
-              _StatItem(
-                value: '15,000+',
-                label: 'SMS Colors',
-              ),
-              _StatItem(
-                value: 'ISO 12647',
-                label: 'Based Standard',
-              ),
+              _StatItem(value: '359M', label: 'Companies Registered'),
+              _StatItem(value: '15,000+', label: 'SMS Colors'),
+              _StatItem(value: 'ISO 12647', label: 'Based Standard'),
             ],
           );
         },
@@ -54,27 +42,31 @@ class _StatItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          value,
-          style: (isMobile ? AppTextStyles.h3 : AppTextStyles.statNumber).copyWith(
-            fontSize: isMobile ? 28 : 36,
-            fontWeight: FontWeight.w700,
-            color: AppColors.textPrimary,
+    return Container(
+      color: AppColors.Smsbackground,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            value,
+            style: (isMobile ? AppTextStyles.h3 : AppTextStyles.statNumber)
+                .copyWith(
+                  fontSize: isMobile ? 28 : 36,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.textPrimary,
+                ),
           ),
-        ),
-        const SizedBox(height: 6),
-        Text(
-          label,
-          style: AppTextStyles.statLabel.copyWith(
-            fontSize: isMobile ? 12 : 14,
-            color: AppColors.textLight,
+          const SizedBox(height: 6),
+          Text(
+            label,
+            style: AppTextStyles.statLabel.copyWith(
+              fontSize: isMobile ? 12 : 14,
+              color: AppColors.textLight,
+            ),
+            textAlign: TextAlign.center,
           ),
-          textAlign: TextAlign.center,
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
